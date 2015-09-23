@@ -16,8 +16,11 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/links/new' do
-    Link.create(url: params[:url], title: params[:title])
-    redirect '/links'
+    link = Link.new(url: params[:url], title: params[:title])
+    tag = Tag.create(name: params[:tag])
+    link.tags << tag
+    link.save
+    redirect ('/links')
   end
 
   # start the server if ruby file executed directly
