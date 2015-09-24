@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-
 
 <title>Bookmark Manager</title>
 
-<body>
-  <% if current_user %>
-  <p> Welcome, <%=current_user.email%></p>
-  <% end %>
-  <%=yield %>
-</body>
+  <body>
+    <% if current_user %>
+    <p> Welcome, <%=current_user.email%></p>
+    <% end %>
+    <%=yield %>
+  </body>

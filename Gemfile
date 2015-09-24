@@ -15,4 +15,5 @@ group :test do
 gem 'rspec'
 gem 'capybara'
 gem 'byebug'
+gem 'pry'
 end
