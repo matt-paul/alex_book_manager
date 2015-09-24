@@ -1,13 +1,13 @@
 require 'sinatra/base'
 require_relative 'data_mapper_setup.rb'
-require 'byebug'
+# require 'byebug'
 
 class BookmarkManager < Sinatra::Base
 
   enable :sessions
   set :session_secret, 'super secret'
 
-  helpers do 
+  helpers do
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
@@ -20,6 +20,7 @@ class BookmarkManager < Sinatra::Base
   get '/links' do
   	@links = Link.all
   	erb :'links/index'
+
   end
 
   get '/links/new' do
@@ -51,6 +52,7 @@ class BookmarkManager < Sinatra::Base
                 password: params[:password])
     session[:user_id] = user.id
     redirect to('/links')
+
   end
 
 
