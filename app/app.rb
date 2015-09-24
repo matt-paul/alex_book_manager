@@ -1,7 +1,11 @@
 require 'sinatra/base'
 require_relative 'data_mapper_setup.rb'
+require 'byebug'
 
 class BookmarkManager < Sinatra::Base
+
+  enable :sessions
+
   get '/' do
     'Hello BookmarkManager!'
   end
@@ -30,6 +34,19 @@ class BookmarkManager < Sinatra::Base
   	@links = tag ? tag.links : []
   	erb :'links/index'
   end
+
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  post '/users' do
+    User.create(email: params[:email],
+    password: params[:password])
+    session[:email] = params[:email]
+    byebug
+    redirect to('/links')
+  end
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0
