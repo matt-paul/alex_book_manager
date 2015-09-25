@@ -55,7 +55,11 @@ class BookmarkManager < Sinatra::Base
     @user = User.new(email: params[:email],
                 password: params[:password],
                 password_confirmation: params[:password_confirmation])
-    if @user.save
+    if params[:email] == ""
+      flash.now[:notice] = "You must enter a valid email address"
+      erb :'users/new'
+
+    elsif @user.save
       session[:user_id] = @user.id
       redirect to('/')
     else
